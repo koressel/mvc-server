@@ -1,0 +1,43 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+hr {
+  border: 1px solid rgb(220, 221, 223);
+  background: rgb(220, 221, 223);
+  margin-bottom: 1em;
+}
+
+.outline {
+  border: 1px solid rgb(167, 167, 167);
+  padding: 2em;
+  display: block;
+  width: 500px;
+  margin: 2em auto;
+}
+
+/* === New Application Form === */
+form#new-application-form label,input,button {
+  display: block;
+}
+form#new-application-form input {
+  margin-bottom: 1em;
+}
+form#new-application-form button {
+  margin-top: 1em;
+}
+
+/* === Applications === */
+.applications {
+  padding: 1em;
+}

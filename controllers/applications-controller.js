@@ -1,7 +1,12 @@
 var applicationsModel = require('../models/applications-model');
 
 module.exports = {
-    getApplications: function(req,res) {
-
+    createApplication: function(req,res) {
+        console.log(req.body);
+        // applicationsModel.createNew()
+        //     .then(result => {
+        //         res.render('index', {applications: result})
+        //     });
+        res.sendStatus(200);
     }
 }

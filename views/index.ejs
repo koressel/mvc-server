@@ -5,16 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <form method="post" action="/applications" id="new-application-form" class="outline">
+    <form id="new-application-form" class="outline" onSubmit="return false">
       <h1>Create a new application</h1>
       <hr/>
       <label for="postion">Position</label>
-      <input type="text" id="postion">
+      <input type="text" id="position" name="position">
       <label for="company">Company</label>
-      <input type="text" id="company">
+      <input type="text" id="company" name="company">
       <label for="date">Date</label>
-      <input type="date" id="date">
-      <button type="submit">Save</button>
+      <input type="date" id="date" name="date">
+      <button id="submit-btn" type="submit">Save</button>
     </form>
     <content class="outline">
       <h1>Applications</h1>
@@ -27,5 +27,6 @@
         </div>
       <% }); %> 
     </content>
+    <script src="./javascripts/index.js"></script>
   </body>
 </html>

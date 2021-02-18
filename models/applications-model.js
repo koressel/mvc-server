@@ -3,43 +3,32 @@ const { Client } = require('pg');
 
 module.exports = {
     getApplications: function() {
-        const client = new Client({
-            connectionString: 'postgresql-infinite-40591',
-            ssl: {
-                rejectUnauthorized: false
+        return new Promise((resolve,reject) => {
+            const client = new Client({
+                // connectionString: 'postgresql-infinite-40591',
+                // ssl: {
+                //     rejectUnauthorized: false
+                // }
+                host: 'localhost',
+                user: 'server',
+                password: 'K2;aFACK!',
+                database: 'applicationdashboard',
+                port: 5432
+                });
+    
+            client.connect();
+    
+            client.query('SELECT * FROM applications;', (err, res) => {
+            if (err) {
+                console.log(err);
+                reject(err);
             }
+
+            resolve(res.rows)
+
+            client.end();
+    
             });
-
-        client.connect();
-
-        let data = [];
-        
-        client.query('SELECT * FROM applications;', (err, res) => {
-        if (err) throw err;
-        for (let row of res.rows) {
-            // console.log(JSON.stringify(row));
-            data.push(JSON.stringify(row))
-        }
-        client.end();
         });
-
-        // var data = [
-        //     {
-        //         position: 'Developer',
-        //         company: 'Google',
-        //         date: '02/28/2021'
-        //     },
-        //     {
-        //         position: 'Web Developer',
-        //         company: 'Facebook',
-        //         date: '02/28/2021'
-        //     },
-        //     {
-        //         position: 'Tech Lead',
-        //         company: 'Spotify',
-        //         date: '02/28/2020'
-        //     },
-        // ];
-        return data;
     }
 }

@@ -13,17 +13,17 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
     fd.append('company', company);
     fd.append('date', date);
     
-    console.log('Form Data:',fd)
+    console.log(fd)
 
-    async function postData(url = '', data = {}) {
+    async function postData(url, data) {
         const response = await fetch(url, {
             method: 'POST',
             cache: 'no-cache',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'false'
             },
             redirect: 'follow',
-            body: JSON.stringify(data)
+            body: data
         });
         return response.json();
     }

@@ -3,35 +3,28 @@ let NEWAPPLICATION_FORM = document.getElementById('new-application-form');
 NEWAPPLICATION_FORM.addEventListener('submit', e => {
     e.preventDefault();
 
-    let NEWAPPLICATION_FORM_NEW = document.getElementById('new-application-form');
-    let position = document.getElementById('position').value;
-    let company = document.getElementById('company').value;
-    let date = document.getElementById('date').value;
-
-    let fd = new FormData();
-    fd.append('position', position);
-    fd.append('company', company);
-    fd.append('date', date);
-    
-    console.log(fd)
-
-    async function postData(url, data) {
-        const response = await fetch(url, {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'false'
-            },
-            redirect: 'follow',
-            body: data
-        });
-        return response.json();
+    const _position = document.getElementById('position').value;
+    const _company = document.getElementById('company').value;
+    const _date = document.getElementById('date').value;
+    const data = {
+        position: _position,
+        company: _company,
+        date: _date
     }
 
-  
-
-    postData('/applications/createNew', fd)
-        .then(res => {
-            console.log(res)
-        })
-})
+    fetch('/applications/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log('Success', data);
+    // })
+    // .catch((error) => {
+    //     console.error('Error:', error);
+    // })
+    
+});

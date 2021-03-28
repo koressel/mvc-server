@@ -29,13 +29,13 @@ module.exports = {
         });
     },
 
-    createNew: function(data) {
+    create: function(data) {
         return new Promise((resolve,reject) => {
             const client = new Client(dbConfig);
             
             client.connect();
 
-            client.query('INSERT INTO applications(position,company,date) VALUES(')
+            client.query(`INSERT INTO applications(position,company,date) VALUES('${data.position}','${data.company}','${data.date}');`)
         });
     }
 }

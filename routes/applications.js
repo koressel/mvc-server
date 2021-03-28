@@ -4,7 +4,7 @@ var router = express.Router();
 
 // router.get('/', applicationsController.getApplications);
 router.post('/createNew', (req,res) => {
-    console.log(req.body);
+    console.log('From /createNew router: ', req.body);
     // applicationsController.createApplication(req,res)
 });
 // router.get('/edit', applicationsController.editApplication);

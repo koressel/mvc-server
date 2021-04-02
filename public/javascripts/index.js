@@ -1,5 +1,7 @@
 const NEWAPPLICATION_FORM = document.getElementById('new-application-form');
 const APPLICATIONS_CONTENT = document.getElementById('applications-container');
+const EDITAPPLICATION_BTN = document.getElementById('edit-btn');
+const CREATE_NEW_LINK = document.getElementById('create-new-link');
 
 NEWAPPLICATION_FORM.addEventListener('submit', e => {
     e.preventDefault();
@@ -61,4 +63,25 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
             })
         }
     }
+});
+
+EDITAPPLICATION_BTN.addEventListener('click', e => {
+    e.preventDefault();
+
+    const EDIT_FORM = document.getElementById('edit-application-form');
+    NEWAPPLICATION_FORM.classList = 'hidden input-form outline';
+    EDIT_FORM.classList = 'show input-form outline';
+    EDIT_FORM.focus();
+});
+
+CREATE_NEW_LINK.addEventListener('click', e => {
+    e.preventDefault();
+
+    console.log('clicked')
+
+    const EDIT_FORM = document.getElementById('edit-application-form');
+    EDIT_FORM.classList = 'hidden input-form outline';
+    NEWAPPLICATION_FORM.classList = 'show input-form outline';
+    NEWAPPLICATION_FORM.focus();
+
 });

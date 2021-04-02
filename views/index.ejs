@@ -5,8 +5,21 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <form id="new-application-form" class="outline" onSubmit="return false">
-      <h1>Create a new application</h1>
+    <form id="new-application-form" class="input-form outline" onSubmit="return false">
+      <h1>Create New</h1>
+      <hr/>
+      <label for="postion">Position</label>
+      <input type="text" id="position" name="position">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company">
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date">
+      <button id="submit-btn" type="submit">Create</button>
+    </form>
+    <form id="edit-application-form" class="hidden input-form outline" onSubmit="return false">
+      <a href="#" id='create-new-link'>Create New</a>
+      <h1>Edit</h1>
+      <div class="clear"></div>
       <hr/>
       <label for="postion">Position</label>
       <input type="text" id="position" name="position">
@@ -22,9 +35,13 @@
       <% applications.forEach(app => { %>
         <div class="applications">
           <button class="delete-application-btn">X</button>
-          <h2><%= app.position %></h2>
-          <h3><%= app.company %></h3>
-          <p><%= app.date %></p>
+          <button id="edit-btn" class="edit-application-btn">Edit</button>
+          <h2><%= app.position %></h2><span class="company">&nbsp;at <%= app.company %></span>
+          <p class="date"><%= app.date %><span class="sub-text">&nbsp;Date Applied</span></p>
+          <h3>Notes</h3>
+          <div class="notes-container"></div>
+          <h3>Files</h3>
+          <h3>Links</h3>
         </div>
       <% }); %> 
     </content>

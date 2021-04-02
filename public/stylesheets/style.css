@@ -19,6 +19,10 @@ hr {
   margin-bottom: 1em;
 }
 
+div.clear {
+  clear: right;
+}
+
 .outline {
   border: 1px solid rgb(167, 167, 167);
   padding: 2em;
@@ -27,15 +31,26 @@ hr {
   margin: 2em auto;
 }
 
-/* === New Application Form === */
-form#new-application-form label,input,button {
+/* === Input Forms === */
+.hidden {display: none;}
+.show {display: block;}
+.input-form label,input,button {
   display: block;
 }
-form#new-application-form input {
+.input-form input {
   margin-bottom: 1em;
 }
-form#new-application-form button {
+.input-form button {
   margin-top: 1em;
+}
+#create-new-link {
+  float: right;
+  margin-top: 7px;
+  font-size: 12pt;
+  text-decoration: none;
+}
+#create-new-link:hover {
+  text-decoration: underline;
 }
 
 /* === Applications === */
@@ -44,10 +59,35 @@ form#new-application-form button {
 }
 
 .delete-application-btn {
-  border: 1px solid black;
+  border: none;
   color: white;
   background: red;
 }
 .delete-application-btn:hover {
   background: rgb(180, 0, 0);
+}
+.edit-application-btn {
+  border: none;
+  color: white;
+  background: rgb(36, 36, 230);
+}
+.edit-application-btn:hover {
+  background: rgb(30, 30, 189);
+}
+
+.applications h2 {
+  display: inline-block;
+  margin: 0;
+  font-size: 16pt;
+}
+.applications .company {
+  font-size: 14pt;
+}
+.applications .date {
+  margin: 0;
+  font-size: 12pt;
+}
+.applications .sub-text {
+  font-size: 9pt;
+  opacity: 80%;
 }

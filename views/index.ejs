@@ -16,11 +16,12 @@
       <input type="date" id="date" name="date">
       <button id="submit-btn" type="submit">Save</button>
     </form>
-    <content class="outline">
+    <content id="applications-container" class="outline">
       <h1>Applications</h1>
       <hr/>
       <% applications.forEach(app => { %>
         <div class="applications">
+          <button class="delete-application-btn">X</button>
           <h2><%= app.position %></h2>
           <h3><%= app.company %></h3>
           <p><%= app.date %></p>

@@ -35,7 +35,34 @@ module.exports = {
             
             client.connect();
 
-            client.query(`INSERT INTO applications(position,company,date) VALUES('${data.position}','${data.company}','${data.date}');`)
+            client.query(`INSERT INTO applications(position,company,date) VALUES('${data.position}','${data.company}','${data.date}');`, (err, res) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                }
+
+                resolve(res.rows);
+
+                client.end();
+            })
+        });
+    },
+
+    delete: function(data) {
+        return new Promise((resolve,reject) => {
+            const client = new Client(dbConfig);
+
+            client.connect();
+
+            client.query(`DELETE FROM applications WHERE position='${data.position}' AND company='${data.company}'`, (err, res) => {
+                if(err) {
+                    console.log(err);
+                    reject(err);
+                }
+
+                resolve(res.rows);
+                client.end();
+            });
         });
     }
 }

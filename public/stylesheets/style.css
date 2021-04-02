@@ -42,3 +42,12 @@ form#new-application-form button {
 .applications {
   padding: 1em;
 }
+
+.delete-application-btn {
+  border: 1px solid black;
+  color: white;
+  background: red;
+}
+.delete-application-btn:hover {
+  background: rgb(180, 0, 0);
+}

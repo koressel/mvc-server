@@ -13,21 +13,23 @@
         <option>Company</option>
         <option>Position</option>
       </select></p>
-      <a href="#">Create New</a>
+      <a href="#" id='create-new-link'>Create New</a>
     </header>
-    <form id="new-application-form" class="input-form outline" onSubmit="return false">
-      <h1>Create New</h1>
-      <hr/>
-      <label for="postion">Position</label>
-      <input type="text" id="position" name="position">
-      <label for="company">Company</label>
-      <input type="text" id="company" name="company">
-      <label for="date">Date</label>
-      <input type="date" id="date" name="date">
-      <button id="submit-btn" type="submit">Create</button>
+    <form id="new-application-form" class="modal input-form outline" onSubmit="return false">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1>Create New</h1>
+        <hr/>
+        <label for="postion">Position</label>
+        <input type="text" id="position" name="position">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date">
+        <button id="submit-btn" type="submit">Create</button>
+      </div>
     </form>
     <form id="edit-application-form" class="hidden input-form outline" onSubmit="return false">
-      <a href="#" id='create-new-link'>Create New</a>
       <h1>Edit</h1>
       <div class="clear"></div>
       <hr/>

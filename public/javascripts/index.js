@@ -2,6 +2,7 @@ const NEWAPPLICATION_FORM = document.getElementById('new-application-form');
 const APPLICATIONS_CONTENT = document.getElementById('applications-container');
 const EDITAPPLICATION_BTN = document.getElementById('edit-btn');
 const CREATE_NEW_LINK = document.getElementById('create-new-link');
+const EXIT_SPAN = document.querySelector('.close');
 
 NEWAPPLICATION_FORM.addEventListener('submit', e => {
     e.preventDefault();
@@ -77,11 +78,11 @@ EDITAPPLICATION_BTN.addEventListener('click', e => {
 CREATE_NEW_LINK.addEventListener('click', e => {
     e.preventDefault();
 
-    console.log('clicked')
+    const modal = document.getElementById('new-application-form');
+    modal.style.display = 'block';
+});
 
-    const EDIT_FORM = document.getElementById('edit-application-form');
-    EDIT_FORM.classList = 'hidden input-form outline';
-    NEWAPPLICATION_FORM.classList = 'show input-form outline';
-    NEWAPPLICATION_FORM.focus();
-
+EXIT_SPAN.addEventListener('click', e => {
+    const modal = document.getElementById('new-application-form');
+    modal.style.display = 'none';
 });

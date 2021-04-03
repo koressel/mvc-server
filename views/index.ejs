@@ -5,6 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <header>
+      <h1>Dashboard</h1>
+      <input type="text" id="search-input" name="search-input"><button>Search</button>
+      <p>Filter By <select>
+        <option>Date</option>
+        <option>Company</option>
+        <option>Position</option>
+      </select></p>
+      <a href="#">Create New</a>
+    </header>
     <form id="new-application-form" class="input-form outline" onSubmit="return false">
       <h1>Create New</h1>
       <hr/>
@@ -29,21 +39,29 @@
       <input type="date" id="date" name="date">
       <button id="submit-btn" type="submit">Save</button>
     </form>
-    <content id="applications-container" class="outline">
-      <h1>Applications</h1>
-      <hr/>
-      <% applications.forEach(app => { %>
-        <div class="applications">
-          <button class="delete-application-btn">X</button>
-          <button id="edit-btn" class="edit-application-btn">Edit</button>
-          <h2><%= app.position %></h2><span class="company">&nbsp;at <%= app.company %></span>
-          <p class="date"><%= app.date %><span class="sub-text">&nbsp;Date Applied</span></p>
-          <h3>Notes</h3>
-          <div class="notes-container"></div>
-          <h3>Files</h3>
-          <h3>Links</h3>
-        </div>
-      <% }); %> 
+    <content id="applications-container">
+      <div id="flex-container">
+        <% applications.forEach(app => { %>
+          <div class="applications">
+            <button class="delete-application-btn">X</button>
+            <button id="edit-btn" class="edit-application-btn">Edit</button>
+            <h2><%= app.position %></h2><span class="company">&nbsp;at <%= app.company %></span>
+            <p class="date"><%= app.date %><span class="sub-text">&nbsp;Date Applied</span></p>
+            <h3>Notes</h3>
+            <div class="notes-container"></div>
+            <div class="files-container">
+              <h3>Files</h3>
+              <a href="#">resume_techLead_Amazon.pdf</a>
+              <a href="#">cv_techLead_Amazon.pdf</a>
+            </div>
+            <div class="links-container">
+              <h3>Links</h3>
+              <a href="#">https://amazon.com/careers/</a>
+              <a href="#">https://linkedin.com/hiring-manager/</a>
+            </div>
+          </div>
+        <% }); %> 
+      </div>
     </content>
     <script src="./javascripts/index.js"></script>
   </body>

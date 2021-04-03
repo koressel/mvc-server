@@ -8,6 +8,7 @@ body {
 a {
   color: #00B7FF;
 }
+p {margin: 0;padding: 0;}
 
 h1 {
   margin: 0;
@@ -29,6 +30,12 @@ div.clear {
   display: block;
   width: 500px;
   margin: 2em auto;
+}
+
+/* === Header === */
+header {
+  display: grid;
+  grid-template-columns: 25fr 25fr 25fr 25fr;
 }
 
 /* === Input Forms === */
@@ -54,10 +61,14 @@ div.clear {
 }
 
 /* === Applications === */
+#flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
 .applications {
   padding: 1em;
+  width: 300px;
 }
-
 .delete-application-btn {
   border: none;
   color: white;
@@ -90,4 +101,18 @@ div.clear {
 .applications .sub-text {
   font-size: 9pt;
   opacity: 80%;
+}
+.applications .files-container a {
+  display: block;
+  text-decoration: none;
+}
+.applications .files-container a:hover {
+  text-decoration: underline;
+}
+.applications .links-container a {
+  display: block;
+  text-decoration: none;
+}
+.applications .links-container a:hover {
+  text-decoration: underline;
 }

@@ -67,12 +67,8 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
 });
 
 EDITAPPLICATION_BTN.addEventListener('click', e => {
-    e.preventDefault();
-
-    const EDIT_FORM = document.getElementById('edit-application-form');
-    NEWAPPLICATION_FORM.classList = 'hidden input-form outline';
-    EDIT_FORM.classList = 'show input-form outline';
-    EDIT_FORM.focus();
+    const modal = document.getElementById('edit-application-form');
+    modal.style.display = 'block';
 });
 
 CREATE_NEW_LINK.addEventListener('click', e => {
@@ -86,3 +82,17 @@ EXIT_SPAN.addEventListener('click', e => {
     const modal = document.getElementById('new-application-form');
     modal.style.display = 'none';
 });
+
+window.addEventListener('click', e => {     
+    const createNew_modal = document.getElementById('new-application-form');
+    const edit_modal = document.getElementById('new-application-form');
+    
+    if(e.target == createNew_modal) {
+        createNew_modal.style.display = 'none';
+        
+    }
+    if (e.target == edit_modal) {
+        edit_modal.style.display = 'none';
+    }
+    
+})

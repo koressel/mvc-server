@@ -25,9 +25,11 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
     })
     .then(response => {
         NEWAPPLICATION_FORM.reset();
+        NEWAPPLICATION_FORM.style.display = 'none';
     })
     .catch((error) => {
         console.error('Error:', error);
+        NEWAPPLICATION_FORM.style.display = 'none';
     })
 });
 

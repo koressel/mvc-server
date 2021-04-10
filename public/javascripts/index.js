@@ -35,7 +35,11 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
 
 APPLICATIONS_CONTENT.addEventListener('click', e => {
     if (e.target.classList.contains('edit-application-btn')) {
+        let application = e.target.parentElement;
+        let data = application.children();
+        let position = data[]
         const editModal = document.getElementById('edit-application-form');
+        
         editModal.style.display = 'block';
     }
 

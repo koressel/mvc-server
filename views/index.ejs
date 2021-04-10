@@ -17,7 +17,7 @@
     </header>
     <form id="new-application-form" class="modal input-form outline" onSubmit="return false">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span id="exit-new-modal-btn">&times;</span>
         <h1>Create New</h1>
         <hr/>
         <label for="postion">Position</label>
@@ -31,8 +31,8 @@
     </form>
     <form id="edit-application-form" class="modal input-form outline" onSubmit="return false">
       <div class="modal-content">
+        <span id="exit-edit-modal-btn">&times;</span>
         <h1>Edit</h1>
-        <div class="clear"></div>
         <hr/>
         <label for="postion">Position</label>
         <input type="text" id="position" name="position">

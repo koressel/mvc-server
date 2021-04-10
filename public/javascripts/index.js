@@ -1,8 +1,8 @@
 const NEWAPPLICATION_FORM = document.getElementById('new-application-form');
 const APPLICATIONS_CONTENT = document.getElementById('applications-container');
-const EDITAPPLICATION_BTN = document.getElementById('edit-btn');
 const CREATE_NEW_LINK = document.getElementById('create-new-link');
-const EXIT_SPAN = document.querySelector('.close');
+const exitNewModalBTN = document.getElementById('exit-new-modal-btn');
+const exitEditModalBTN = document.getElementById('exit-edit-modal-btn');
 
 NEWAPPLICATION_FORM.addEventListener('submit', e => {
     e.preventDefault();
@@ -34,7 +34,12 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
 });
 
 APPLICATIONS_CONTENT.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON' && e.target.classList.contains('delete-application-btn')) {
+    if (e.target.classList.contains('edit-application-btn')) {
+        const editModal = document.getElementById('edit-application-form');
+        editModal.style.display = 'block';
+    }
+
+    if (e.target.classList.contains('delete-application-btn')) {
         const DELETE_BTN = e.target;
         const APPLICATION_DIV = DELETE_BTN.parentElement;
         const _position = APPLICATION_DIV.children[1].textContent;
@@ -68,11 +73,6 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
     }
 });
 
-EDITAPPLICATION_BTN.addEventListener('click', e => {
-    const modal = document.getElementById('edit-application-form');
-    modal.style.display = 'block';
-});
-
 CREATE_NEW_LINK.addEventListener('click', e => {
     e.preventDefault();
 
@@ -80,14 +80,19 @@ CREATE_NEW_LINK.addEventListener('click', e => {
     modal.style.display = 'block';
 });
 
-EXIT_SPAN.addEventListener('click', e => {
-    const modal = document.getElementById('new-application-form');
-    modal.style.display = 'none';
+exitNewModalBTN.addEventListener('click', e => {
+    const newModal = document.getElementById('new-application-form');
+    newModal.style.display = 'none';
+});
+
+exitEditModalBTN.addEventListener('click', e => {
+    const newModal = document.getElementById('edit-application-form');
+    newModal.style.display = 'none';
 });
 
 window.addEventListener('click', e => {     
     const createNew_modal = document.getElementById('new-application-form');
-    const edit_modal = document.getElementById('new-application-form');
+    const edit_modal = document.getElementById('edit-application-form');
     
     if(e.target == createNew_modal) {
         createNew_modal.style.display = 'none';

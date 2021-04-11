@@ -35,7 +35,10 @@ div.clear {
 /* === Header === */
 header {
   display: grid;
-  grid-template-columns: 25fr 25fr 25fr 25fr;
+  grid-template-columns: 20fr 20fr 20fr 20fr 20fr;
+  margin: 0 0 4em 0;
+  padding: .5em;
+  border-bottom: 1px solid rgb(97, 97, 97);
 }
 
 /* === Input Forms === */
@@ -100,10 +103,15 @@ header {
 #flex-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: flex-start;
 }
 .applications {
   padding: 1em;
-  width: 300px;
+  width: fit-content;
+  transition: background 200ms;
+}
+.applications:hover {
+  background: rgb(231, 231, 231);
 }
 .delete-application-btn {
   border: none;

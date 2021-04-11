@@ -36,8 +36,15 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
 APPLICATIONS_CONTENT.addEventListener('click', e => {
     if (e.target.classList.contains('edit-application-btn')) {
         let application = e.target.parentElement;
-        let data = application.children();
-        let position = data[]
+        let data = application.children;
+        let position = data[2].textContent;
+        let company = data[3].textContent;
+        company = company.substr(4);
+        let date = data[4].textContent;
+        date = date.substr(0,7);
+        console.log(position,company,date)
+
+        
         const editModal = document.getElementById('edit-application-form');
         
         editModal.style.display = 'block';

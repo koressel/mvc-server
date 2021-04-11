@@ -30,6 +30,7 @@ module.exports = {
     },
 
     create: function(data) {
+        console.log(data)
         return new Promise((resolve,reject) => {
             const client = new Client(dbConfig);
             
@@ -40,7 +41,9 @@ module.exports = {
                     console.log(err);
                     reject(err);
                 }
-
+                // KNOWN BUG
+                // Need to escape special characters at some point before this.
+                // Found when trying to run above query with 'Papa John\'s' as a value for company
                 resolve(res.rows);
 
                 client.end();
@@ -49,6 +52,7 @@ module.exports = {
     },
 
     delete: function(data) {
+        console.log(data)
         return new Promise((resolve,reject) => {
             const client = new Client(dbConfig);
 
@@ -59,7 +63,7 @@ module.exports = {
                     console.log(err);
                     reject(err);
                 }
-
+                console.log(res)
                 resolve(res.rows);
                 client.end();
             });

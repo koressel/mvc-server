@@ -11,7 +11,6 @@ module.exports = {
             });
     },
     deleteApplication: function(req,res) {
-        res.sendStatus(200);
         applicationsModel.delete(req.body)
             .then(result => {
                 res.sendStatus(200);

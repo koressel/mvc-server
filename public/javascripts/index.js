@@ -1,10 +1,17 @@
-const NEWAPPLICATION_FORM = document.getElementById('new-application-form');
-const APPLICATIONS_CONTENT = document.getElementById('applications-container');
-const CREATE_NEW_LINK = document.getElementById('create-new-link');
-const exitNewModalBTN = document.getElementById('exit-new-modal-btn');
-const exitEditModalBTN = document.getElementById('exit-edit-modal-btn');
+/*
+* Fetch data after load
+* Save to local storage
+* Add pre-fetch check to local storage
+*/
 
-NEWAPPLICATION_FORM.addEventListener('submit', e => {
+const applicationsContainer = document.getElementById('applications-container');
+const newModal = document.getElementById('new-application-form');
+const openNewModalButton = document.getElementById('create-new-link');
+const closeNewModalButton = document.getElementById('exit-new-modal-btn');
+const editModal = document.getElementById('edit-application-form');
+const closeEditModalButton = document.getElementById('exit-edit-modal-btn');
+
+newModal.addEventListener('submit', e => {
     e.preventDefault();
 
     const _position = document.getElementById('position').value;
@@ -24,16 +31,16 @@ NEWAPPLICATION_FORM.addEventListener('submit', e => {
         body: JSON.stringify(data)
     })
     .then(response => {
-        NEWAPPLICATION_FORM.reset();
-        NEWAPPLICATION_FORM.style.display = 'none';
+        newModal.reset();
+        newModal.style.display = 'none';
     })
     .catch((error) => {
         console.error('Error:', error);
-        NEWAPPLICATION_FORM.style.display = 'none';
+        newModal.style.display = 'none';
     })
 });
 
-APPLICATIONS_CONTENT.addEventListener('click', e => {
+applicationsContainer.addEventListener('click', e => {
     if (e.target.classList.contains('edit-application-btn')) {
         let application = e.target.parentElement;
         let data = application.children;
@@ -44,8 +51,7 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
         date = date.substr(0,7);
         console.log(position,company,date)
 
-        
-        const editModal = document.getElementById('edit-application-form');
+        // const editModal = document.getElementById('edit-application-form');
         
         editModal.style.display = 'block';
     }
@@ -53,14 +59,14 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
     if (e.target.classList.contains('delete-application-btn')) {
         const DELETE_BTN = e.target;
         const APPLICATION_DIV = DELETE_BTN.parentElement;
-        const _position = APPLICATION_DIV.children[1].textContent;
-        const _company = APPLICATION_DIV.children[2].textContent;
-        const _date = APPLICATION_DIV.children[3].textContent;
+        const _position = APPLICATION_DIV.children[2].textContent;
+        const _company = APPLICATION_DIV.children[3].textContent;
+        const _date = APPLICATION_DIV.children[4].textContent;
         
         if (confirm(`${_position} at ${_company}\n${_date}\n\nAre you sure you want to delete this application?\nThis action cannot be undone.`)) {
             const data = {
                 position: _position,
-                company: _company
+                company: _company.substr(4)
             }
     
             fetch('/applications/delete', {
@@ -84,19 +90,19 @@ APPLICATIONS_CONTENT.addEventListener('click', e => {
     }
 });
 
-CREATE_NEW_LINK.addEventListener('click', e => {
+openNewModalButton.addEventListener('click', e => {
     e.preventDefault();
 
     const modal = document.getElementById('new-application-form');
     modal.style.display = 'block';
 });
 
-exitNewModalBTN.addEventListener('click', e => {
+closeNewModalButton.addEventListener('click', e => {
     const newModal = document.getElementById('new-application-form');
     newModal.style.display = 'none';
 });
 
-exitEditModalBTN.addEventListener('click', e => {
+closeEditModalButton.addEventListener('click', e => {
     const newModal = document.getElementById('edit-application-form');
     newModal.style.display = 'none';
 });

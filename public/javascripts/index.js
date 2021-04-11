@@ -2,7 +2,52 @@
 * Fetch data after load
 * Save to local storage
 * Add pre-fetch check to local storage
+
+applications = []
 */
+
+document.onreadystatechange = () => {
+    if (document.readyState === 'complete') {
+        fetch('/applications', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            response.json()
+            .then(data => {
+                let applications = localStorage.getItem('applications');
+                if(!applications) {
+                    populateStorage(data);
+                } else {
+                    console.log('server data saved as')
+                    console.log(localStorage.getItem('applications'))
+                    if (isDeeplyEqual(applications,data)) {
+                        console.log('Yay they are equal')
+                    } else {
+                        console.log('Fuck no they arent')
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        })
+    }
+}
+
+function populateStorage(data) {
+    localStorage.setItem('applications', data);
+}
+
+function isDeeplyEqual(object1, object2) {
+    console.log(_(object1).xorWith(object2, _.isEqual).isEmpty());
+    // return _(object1).xorWith(object2, _.isEqual).isEmpty();
+}
 
 const applicationsContainer = document.getElementById('applications-container');
 const newModal = document.getElementById('new-application-form');
@@ -66,7 +111,7 @@ applicationsContainer.addEventListener('click', e => {
         if (confirm(`${_position} at ${_company}\n${_date}\n\nAre you sure you want to delete this application?\nThis action cannot be undone.`)) {
             const data = {
                 position: _position,
-                company: _company.substr(4)
+                company: _company.substr(4) // substr removes the "at " form the text content
             }
     
             fetch('/applications/delete', {

@@ -2,7 +2,7 @@ var applicationsModel = require('../models/applications-model');
 
 module.exports = {
     getApplications: function(req,res) {
-        applicationsModel.getApplications()
+        applicationsModel.getAll()
             .then(result => {
                 res.render('index', {applications: result})
             });

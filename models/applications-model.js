@@ -10,7 +10,7 @@ const dbConfig = {
 }
 
 module.exports = {
-    getApplications: function() {
+    getAll: function() {
         return new Promise((resolve,reject) => {
             const client = new Client(dbConfig);
     
@@ -21,7 +21,6 @@ module.exports = {
                     console.log(err);
                     reject(err);
                 }
-
                 resolve(res.rows)
 
                 client.end();

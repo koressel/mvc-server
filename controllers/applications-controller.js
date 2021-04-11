@@ -16,5 +16,12 @@ module.exports = {
                 res.sendStatus(200);
             })
             .catch(error => console.log(error));
+    },
+    getAll: function(req,res) {
+        applicationsModel.getAll()
+            .then(result => {
+                res.json(result);
+            })
+            .catch(error => console.log(error));
     }
 }

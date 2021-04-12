@@ -17,12 +17,11 @@ document.onreadystatechange = () => {
         .then(response => {
             response.json()
             .then(data => {
-                let applications = localStorage.getItem('applications');
+                let applications = JSON.parse(localStorage.getItem('applications'));
                 if(!applications) {
                     populateStorage(data);
                 } else {
                     console.log('server data saved as')
-                    console.log(localStorage.getItem('applications'))
                     if (isDeeplyEqual(applications,data)) {
                         console.log('Yay they are equal')
                     } else {
@@ -41,12 +40,12 @@ document.onreadystatechange = () => {
 }
 
 function populateStorage(data) {
-    localStorage.setItem('applications', data);
+    let stringifiedData = JSON.stringify(data);
+    localStorage.setItem('applications', stringifiedData);
 }
 
 function isDeeplyEqual(object1, object2) {
-    console.log(_(object1).xorWith(object2, _.isEqual).isEmpty());
-    // return _(object1).xorWith(object2, _.isEqual).isEmpty();
+    return _(object1).xorWith(object2, _.isEqual).isEmpty();
 }
 
 const applicationsContainer = document.getElementById('applications-container');

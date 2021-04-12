@@ -21,12 +21,10 @@ document.onreadystatechange = () => {
                 if(!applications) {
                     populateStorage(data);
                 } else {
-                    console.log('server data saved as')
-                    if (isDeeplyEqual(applications,data)) {
-                        console.log('Yay they are equal')
-                    } else {
-                        console.log('Fuck no they arent')
-                    }
+                    if (!isDeeplyEqual(applications,data)) {
+                        console.log('Server data ahead of local storage. Updating...')
+                        populateStorage(data)
+                    } else {console.log('Local storage matches server data')}
                 }
             })
             .catch((error) => {
@@ -44,8 +42,8 @@ function populateStorage(data) {
     localStorage.setItem('applications', stringifiedData);
 }
 
-function isDeeplyEqual(object1, object2) {
-    return _(object1).xorWith(object2, _.isEqual).isEmpty();
+function isDeeplyEqual(obj1, obj2) {
+    return _(obj1).xorWith(obj2, _.isEqual).isEmpty();
 }
 
 const applicationsContainer = document.getElementById('applications-container');

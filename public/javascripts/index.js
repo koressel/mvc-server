@@ -1,3 +1,14 @@
+const applicationsContainer = document.getElementById('applications-container');
+
+const newModal = document.getElementById('new-application-form');
+const openNewModalButton = document.getElementById('create-new-link');
+const closeNewModalButton = document.getElementById('exit-new-modal-btn');
+
+const editModal = document.getElementById('edit-application-form');
+let editModalContent = document.getElementById('edit-modal-content');
+const closeEditModalButton = document.getElementById('exit-edit-modal-btn');
+
+// Update local storage after page is loaded
 document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
         fetch('/applications', {
@@ -30,22 +41,65 @@ document.onreadystatechange = () => {
     }
 }
 
-function populateStorage(data) {
-    let stringifiedData = JSON.stringify(data);
-    localStorage.setItem('applications', stringifiedData);
-}
+// handle application button clicks
+applicationsContainer.addEventListener('click', e => {
+    if (e.target.classList.contains('edit-application-btn')) {
+        editModal.style.display = 'block';
+        editModal.reset();
+     
+        const parentElemId = e.target.parentElement.dataset.id;
+        let positionModalInput = document.getElementById('position');
+        let companyModalInput = document.getElementById('company');
+        let dateModalInput = document.getElementById('date');
+        let appId = document.getElementById('edit-id');
+        const applications = JSON.parse(localStorage.getItem('applications'));
 
-function isDeeplyEqual(obj1, obj2) {
-    return _(obj1).xorWith(obj2, _.isEqual).isEmpty();
-}
+        applications.forEach(app => {
+            if(app.id === Number(parentElemId)) {
+                // This is gross
+                editModalContent.childNodes[9].textContent = parentElemId;
+                editModalContent.childNodes[11].value = app.position;
+                editModalContent.childNodes[15].value = app.company;
+                editModalContent.childNodes[19].value = app.date;
+            }
+        })
 
-const applicationsContainer = document.getElementById('applications-container');
-const newModal = document.getElementById('new-application-form');
-const openNewModalButton = document.getElementById('create-new-link');
-const closeNewModalButton = document.getElementById('exit-new-modal-btn');
-const editModal = document.getElementById('edit-application-form');
-let editModalContent = document.getElementById('edit-modal-content');
-const closeEditModalButton = document.getElementById('exit-edit-modal-btn');
+    }
+
+    if (e.target.classList.contains('delete-application-btn')) {
+        const DELETE_BTN = e.target;
+        const APPLICATION_DIV = DELETE_BTN.parentElement;
+        const _position = APPLICATION_DIV.children[2].textContent;
+        const _company = APPLICATION_DIV.children[3].textContent;
+        const _date = APPLICATION_DIV.children[4].textContent;
+        
+        if (confirm(`${_position} at ${_company}\n${_date}\n\nAre you sure you want to delete this application?\nThis action cannot be undone.`)) {
+            const data = {
+                position: _position,
+                company: _company.substr(4) // substr removes the "at " form the text content
+            }
+    
+            fetch('/applications/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log('response status: 200')
+                    console.log(APPLICATION_DIV)
+                    APPLICATION_DIV.style.display = 'none';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+        }
+    }
+});
+
 
 newModal.addEventListener('submit', e => {
     e.preventDefault();
@@ -112,64 +166,6 @@ editModal.addEventListener('submit', e => {
     })
 });
 
-applicationsContainer.addEventListener('click', e => {
-
-    if (e.target.classList.contains('edit-application-btn')) {
-        editModal.style.display = 'block';
-        editModal.reset();
-     
-        const parentElemId = e.target.parentElement.dataset.id;
-        let positionModalInput = document.getElementById('position');
-        let companyModalInput = document.getElementById('company');
-        let dateModalInput = document.getElementById('date');
-        let appId = document.getElementById('edit-id');
-        const applications = JSON.parse(localStorage.getItem('applications'));
-
-        applications.forEach(app => {
-            if(app.id === Number(parentElemId)) {
-                console.log('ids are equal')
-                editModalContent.childNodes[9].textContent = parentElemId;
-                editModalContent.childNodes[11].value = app.position;
-                editModalContent.childNodes[15].value = app.company;
-                editModalContent.childNodes[19].value = app.date;
-            }
-        })
-
-    }
-
-    if (e.target.classList.contains('delete-application-btn')) {
-        const DELETE_BTN = e.target;
-        const APPLICATION_DIV = DELETE_BTN.parentElement;
-        const _position = APPLICATION_DIV.children[2].textContent;
-        const _company = APPLICATION_DIV.children[3].textContent;
-        const _date = APPLICATION_DIV.children[4].textContent;
-        
-        if (confirm(`${_position} at ${_company}\n${_date}\n\nAre you sure you want to delete this application?\nThis action cannot be undone.`)) {
-            const data = {
-                position: _position,
-                company: _company.substr(4) // substr removes the "at " form the text content
-            }
-    
-            fetch('/applications/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    console.log('response status: 200')
-                    console.log(APPLICATION_DIV)
-                    APPLICATION_DIV.style.display = 'none';
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            })
-        }
-    }
-});
 
 openNewModalButton.addEventListener('click', e => {
     e.preventDefault();
@@ -189,6 +185,7 @@ closeEditModalButton.addEventListener('click', e => {
     newModal.style.display = 'none';
 });
 
+// Close modal if the user clicks outside of the modal
 window.addEventListener('click', e => {     
     const createNew_modal = document.getElementById('new-application-form');
     const edit_modal = document.getElementById('edit-application-form');
@@ -201,4 +198,13 @@ window.addEventListener('click', e => {
         edit_modal.style.display = 'none';
     }
     
-})
+});
+
+function populateStorage(data) {
+    let stringifiedData = JSON.stringify(data);
+    localStorage.setItem('applications', stringifiedData);
+}
+
+function isDeeplyEqual(obj1, obj2) {
+    return _(obj1).xorWith(obj2, _.isEqual).isEmpty();
+}

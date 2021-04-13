@@ -77,6 +77,11 @@ newModal.addEventListener('submit', e => {
     })
 });
 
+editModal.addEventListener('submit', e => {
+    e.preventDefault();
+
+})
+
 applicationsContainer.addEventListener('click', e => {
 
     if (e.target.classList.contains('edit-application-btn')) {

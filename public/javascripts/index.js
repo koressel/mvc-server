@@ -1,11 +1,3 @@
-/*
-* Fetch data after load
-* Save to local storage
-* Add pre-fetch check to local storage
-
-applications = []
-*/
-
 document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
         fetch('/applications', {

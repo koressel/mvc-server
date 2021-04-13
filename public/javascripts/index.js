@@ -97,8 +97,6 @@ applicationsContainer.addEventListener('click', e => {
         let dateModalInput = document.getElementById('date');
         const applications = JSON.parse(localStorage.getItem('applications'));
 
-        console.log(positionModalInput)
-
         applications.forEach(app => {
             if(app.id === Number(parentElemId)) {
                 console.log('ids are equal')

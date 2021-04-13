@@ -77,6 +77,7 @@ newModal.addEventListener('submit', e => {
     .then(response => {
         newModal.reset();
         newModal.style.display = 'none';
+        //update applications list here
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -108,8 +109,6 @@ applicationsContainer.addEventListener('click', e => {
             }
         })
 
-
-        
     }
 
     if (e.target.classList.contains('delete-application-btn')) {

@@ -21,6 +21,7 @@ document.onreadystatechange = () => {
                 if(!applications) {
                     populateStorage(data);
                 } else {
+                    console.log(applications)
                     if (!isDeeplyEqual(applications,data)) {
                         console.log('Server data ahead of local storage. Updating...')
                         populateStorage(data)
@@ -51,6 +52,7 @@ const newModal = document.getElementById('new-application-form');
 const openNewModalButton = document.getElementById('create-new-link');
 const closeNewModalButton = document.getElementById('exit-new-modal-btn');
 const editModal = document.getElementById('edit-application-form');
+let editModalContent = document.getElementById('edit-modal-content');
 const closeEditModalButton = document.getElementById('exit-edit-modal-btn');
 
 newModal.addEventListener('submit', e => {
@@ -83,19 +85,31 @@ newModal.addEventListener('submit', e => {
 });
 
 applicationsContainer.addEventListener('click', e => {
-    if (e.target.classList.contains('edit-application-btn')) {
-        let application = e.target.parentElement;
-        let data = application.children;
-        let position = data[2].textContent;
-        let company = data[3].textContent;
-        company = company.substr(4);
-        let date = data[4].textContent;
-        date = date.substr(0,7);
-        console.log(position,company,date)
 
-        // const editModal = document.getElementById('edit-application-form');
-        
+    if (e.target.classList.contains('edit-application-btn')) {
         editModal.style.display = 'block';
+        editModal.reset();
+     
+        const parentElemId = e.target.parentElement.dataset.id;
+        let positionModalInput = document.getElementById('position');
+        let companyModalInput = document.getElementById('company');
+        let dateModalInput = document.getElementById('date');
+        const applications = JSON.parse(localStorage.getItem('applications'));
+
+        console.log(positionModalInput)
+
+        applications.forEach(app => {
+            if(app.id === Number(parentElemId)) {
+                console.log('ids are equal')
+               
+                editModalContent.childNodes[9].value = app.position;
+                editModalContent.childNodes[13].value = app.company;
+                editModalContent.childNodes[17].value = app.date;
+            }
+        })
+
+
+        
     }
 
     if (e.target.classList.contains('delete-application-btn')) {
@@ -137,6 +151,7 @@ openNewModalButton.addEventListener('click', e => {
 
     const modal = document.getElementById('new-application-form');
     modal.style.display = 'block';
+    modal.reset();
 });
 
 closeNewModalButton.addEventListener('click', e => {

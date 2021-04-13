@@ -30,7 +30,7 @@
       </div>
     </form>
     <form id="edit-application-form" class="modal input-form outline" onSubmit="return false">
-      <div class="modal-content">
+      <div id="edit-modal-content" class="modal-content">
         <span id="exit-edit-modal-btn">&times;</span>
         <h1>Edit</h1>
         <hr/>
@@ -46,7 +46,7 @@
     <content id="applications-container">
       <div id="flex-container">
         <% applications.forEach(app => { %>
-          <div class="applications">
+          <div class="applications" data-id="<%= app.id %>">
             <button class="delete-application-btn">X</button>
             <button id="edit-btn" class="edit-application-btn">Edit</button>
             <h2><%= app.position %></h2><span class="company">&nbsp;at <%= app.company %></span>

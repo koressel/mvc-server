@@ -35,7 +35,7 @@ module.exports = {
             
             client.connect();
 
-            client.query(`INSERT INTO applications(position,company,date) VALUES('${data.position}','${data.company}','${data.date}');`, (err, res) => {
+            client.query(`INSERT INTO applications(position,company,date,id) VALUES('${data.position}','${data.company}','${data.date}',default);`, (err, res) => {
                 if (err) {
                     console.log(err);
                     reject(err);

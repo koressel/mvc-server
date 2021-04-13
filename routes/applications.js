@@ -12,6 +12,8 @@ router.post('/delete', (req,res) => {
     applicationsController.deleteApplication(req,res);
 });
 
-// router.get('/edit', applicationsController.editApplication);
+router.post('/update', (req,res) => {
+    applicationsController.editApplication(req,res);
+});
 
 module.exports = router;

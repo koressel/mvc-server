@@ -80,7 +80,37 @@ newModal.addEventListener('submit', e => {
 editModal.addEventListener('submit', e => {
     e.preventDefault();
 
-})
+    //
+    // a check if the application is changed is needed
+    //
+
+    const _position = document.getElementById('edit-position').value;
+    const _company = document.getElementById('edit-company').value;
+    const _date = document.getElementById('edit-date').value;
+    const _id = document.getElementById('edit-id');
+    const data = {
+        position: _position,
+        company: _company,
+        date: _date,
+        id: _id.textContent
+    }
+
+    fetch('/applications/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        editModal.reset();
+        editModal.style.display = 'none';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        editModal.style.display = 'none';
+    })
+});
 
 applicationsContainer.addEventListener('click', e => {
 
@@ -92,15 +122,16 @@ applicationsContainer.addEventListener('click', e => {
         let positionModalInput = document.getElementById('position');
         let companyModalInput = document.getElementById('company');
         let dateModalInput = document.getElementById('date');
+        let appId = document.getElementById('edit-id');
         const applications = JSON.parse(localStorage.getItem('applications'));
 
         applications.forEach(app => {
             if(app.id === Number(parentElemId)) {
                 console.log('ids are equal')
-               
-                editModalContent.childNodes[9].value = app.position;
-                editModalContent.childNodes[13].value = app.company;
-                editModalContent.childNodes[17].value = app.date;
+                editModalContent.childNodes[9].textContent = parentElemId;
+                editModalContent.childNodes[11].value = app.position;
+                editModalContent.childNodes[15].value = app.company;
+                editModalContent.childNodes[19].value = app.date;
             }
         })
 

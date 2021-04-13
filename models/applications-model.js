@@ -67,5 +67,23 @@ module.exports = {
                 client.end();
             });
         });
+    },
+
+    edit: function(data) {
+        return new Promise((resolve,reject) => {
+            const client = new Client(dbConfig);
+
+            client.connect();
+
+            client.query(`UPDATE applications SET position='${data.position}',company='${data.company}',date='${data.date}' WHERE id='${data.id}'`, (err, res) => {
+                if(err) {
+                    console.log(err);
+                    reject(err);
+                }
+                console.log(res)
+                resolve(res.rows);
+                client.end();
+            });
+        });
     }
 }

@@ -23,5 +23,12 @@ module.exports = {
                 res.json(result);
             })
             .catch(error => console.log(error));
+    },
+    editApplication: function(req,res) {
+        applicationsModel.edit(req.body)
+        .then(result => {
+            res.json(result);
+        })
+        .catch(error => console.log(error));
     }
 }

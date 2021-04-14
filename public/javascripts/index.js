@@ -123,7 +123,7 @@ newModal.addEventListener('submit', e => {
     .then(response => {
         newModal.reset();
         newModal.style.display = 'none';
-        //update applications list here
+        updateApplications();
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -135,7 +135,7 @@ editModal.addEventListener('submit', e => {
     e.preventDefault();
 
     //
-    // a check if the application is changed is needed
+    // a check if the application is actually changed is needed
     //
 
     const _position = document.getElementById('edit-position').value;
@@ -199,6 +199,44 @@ window.addEventListener('click', e => {
     }
     
 });
+
+function updateApplications() {
+    fetch('/applications',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        response.json()
+        .then(data => {
+            const container = document.getElementById('flex-container');
+            const localApplicationData = JSON.parse(localStorage.getItem('applications'));
+            localApplicationData.forEach(app => {
+                const container = document.createElement('div');
+                container.classList.add('applications');
+                container.dataset.id = app.id;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-application-btn');
+                const deleteButtonText = document.createTextNode('X');
+                deleteButton.appendChild(deleteButtonText);
+
+                const editButton = document.createElement('button');
+                editButton.id = 'edit-btn';
+                editButton.classList.add('edit-application-btn');
+                const editButtonText = document.createTextNode('Edit');
+                editButton.appendChild(editButtonText);
+
+                
+            });
+        })
+        .catch('')
+    })
+    .catch(error => {
+        console.log('Error fetching applications from the server',error);
+    });
+}
 
 function populateStorage(data) {
     let stringifiedData = JSON.stringify(data);

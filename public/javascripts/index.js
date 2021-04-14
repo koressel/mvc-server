@@ -219,7 +219,7 @@ function updateApplications() {
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('delete-application-btn');
-                const deleteButtonText = document.createTextNode('X');
+                const deleteButtonText = document.createTextNode('Delete');
                 deleteButton.appendChild(deleteButtonText);
 
                 const editButton = document.createElement('button');
@@ -228,7 +228,7 @@ function updateApplications() {
                 const editButtonText = document.createTextNode('Edit');
                 editButton.appendChild(editButtonText);
 
-                
+
             });
         })
         .catch('')

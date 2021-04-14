@@ -47,9 +47,6 @@
       <div id="flex-container">
         <% applications.forEach(app => { %>
           <div class="applications" data-id="<%= app.id %>">
-            <button class="delete-application-btn">X</button>
-            <button id="edit-btn" class="edit-application-btn">Edit</button><br class="clear">
-            <hr>
             <h2><%= app.position %></h2><span class="company">&nbsp;at <%= app.company %></span>
             <p class="date"><%= app.date %><span class="sub-text">&nbsp;Date Applied</span></p>
             <h3>Notes</h3>
@@ -64,6 +61,8 @@
               <a href="#">https://amazon.com/careers/</a>
               <a href="#">https://linkedin.com/hiring-manager/</a>
             </div>
+            <button class="delete-application-btn">Delete</button>
+            <button id="edit-btn" class="edit-application-btn">Edit</button>
           </div>
         <% }); %> 
       </div>

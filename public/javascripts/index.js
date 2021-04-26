@@ -3,6 +3,7 @@ const applicationsContainer = document.getElementById('applications-container');
 const newModal = document.getElementById('new-application-form');
 const openNewModalButton = document.getElementById('create-new-link');
 const closeNewModalButton = document.getElementById('exit-new-modal-btn');
+const addNewFileButton = document.getElementById('add-new-file');
 
 const editModal = document.getElementById('edit-application-form');
 let editModalContent = document.getElementById('edit-modal-content');
@@ -130,6 +131,19 @@ newModal.addEventListener('submit', e => {
         newModal.style.display = 'none';
     })
 });
+
+addNewFileButton.addEventListener('click', e => {
+    e.preventDefault();
+    const fileContainer = document.getElementById('file-container');
+    const lastFileId = fileContainer.children[(fileContainer.children.length - 1)].id;
+    const id = Number(lastFileId.substr(lastFileId.length-1));
+    const nextId = (id + 1);
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.id = `file-${nextId}`;
+    input.name = `file-${nextId}`;
+    fileContainer.appendChild(input);
+})
 
 editModal.addEventListener('submit', e => {
     e.preventDefault();

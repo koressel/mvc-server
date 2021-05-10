@@ -14,25 +14,22 @@
       </select></p>
       <a href="#" id='create-new-link'>Create New</a>
     </header>
-    <form id="new-application-form" class="modal input-form outline" onSubmit="return false">
+    <form id="new-application-form" class="modal input-form outline" name="newApplicationForm" onSubmit="return false">
       <div class="modal-content">
         <span id="exit-new-modal-btn">&times;</span>
         <h1>Create New</h1>
         <hr/>
         <label for="postion">Position</label>
-        <input type="text" id="position" name="position">
+        <input type="text" id="position" name="position" value="TEST">
         <label for="company">Company</label>
-        <input type="text" id="company" name="company">
+        <input type="text" id="company" name="company" value="TEST TEST">
         <label for="date">Date</label>
-        <input type="date" id="date" name="date">
+        <input type="date" id="date" name="date" value="2021-09-02">
         <h2>Notes</h2>
-        <textarea id="notes" name="notes"></textarea>
+        <textarea id="notes" name="notes">THIS IS A TEST</textarea>
         <h2>Files</h2>
-        <fieldset id="file-container">
-          <input type="file" id="file-1" name="file-1">
-        </fieldset>
-        <button id="add-new-file">Add another file</button>
-       
+        <input id="uploadInput" type="file" name="applicationFiles" multiple>
+        <div id="fileNameOutput"></div>
         <button id="submit-btn" type="submit">Create</button>
       </div>
     </form>

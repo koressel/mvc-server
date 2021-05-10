@@ -3,7 +3,9 @@ const applicationsContainer = document.getElementById('applications-container');
 const newModal = document.getElementById('new-application-form');
 const openNewModalButton = document.getElementById('create-new-link');
 const closeNewModalButton = document.getElementById('exit-new-modal-btn');
-const addNewFileButton = document.getElementById('add-new-file');
+let uploadInput = document.getElementById('uploadInput');
+uploadInput.addEventListener('change', updateFileList, false);
+
 
 const editModal = document.getElementById('edit-application-form');
 let editModalContent = document.getElementById('edit-modal-content');
@@ -108,18 +110,22 @@ newModal.addEventListener('submit', e => {
     const _position = document.getElementById('position').value;
     const _company = document.getElementById('company').value;
     const _date = document.getElementById('date').value;
-    const data = {
-        position: _position,
-        company: _company,
-        date: _date
+    const _notes = document.getElementById('notes').value;
+    const _files = document.getElementById('uploadInput').files;
+    let fd = new FormData();
+
+    fd.append('position', _position);
+    fd.append('company', _company);
+    fd.append('date', _date);
+    fd.append('notes', _notes);
+    for (let i = 0; i < _files.length; i++) {
+        fd.append('files', _files[i]);
     }
+    console.log(fd)
 
     fetch('/applications/new', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: fd
     })
     .then(response => {
         newModal.reset();
@@ -132,18 +138,19 @@ newModal.addEventListener('submit', e => {
     })
 });
 
-addNewFileButton.addEventListener('click', e => {
-    e.preventDefault();
-    const fileContainer = document.getElementById('file-container');
-    const lastFileId = fileContainer.children[(fileContainer.children.length - 1)].id;
-    const id = Number(lastFileId.substr(lastFileId.length-1));
-    const nextId = (id + 1);
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.id = `file-${nextId}`;
-    input.name = `file-${nextId}`;
-    fileContainer.appendChild(input);
-})
+function updateFileList() {
+    const _files = document.getElementById('uploadInput').files;
+    let fileNameOutput = document.getElementById('fileNameOutput');
+
+    for(let nFileId = 0; nFileId < _files.length; nFileId++) {
+        console.log(_files[nFileId]);
+        const p = document.createElement('p');
+        const fileName = document.createTextNode(_files[nFileId].name);
+        p.appendChild(fileName);
+        fileNameOutput.appendChild(p);
+    }
+}
+
 
 editModal.addEventListener('submit', e => {
     e.preventDefault();

@@ -4,23 +4,17 @@ var applicationsController = require('../controllers/applications-controller');
 var router = express.Router();
 var multer  = require('multer')
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
+    destination: function (req, file, cb) { cb(null, './uploads/'); },
+    // filename needs a timestamp
+    filename: function (req, file, cb) { cb(null, file.originalname); }
 });
 var upload = multer({ storage: storage })
 
 router.get('/',(req,res) => {
     applicationsController.getAll(req,res);
 });
-router.post('/new', upload.array('files', 12), (req,res) => {
-    console.log(req.files[0])
-    console.log(req.body)
-    res.status(200);
-    // applicationsController.createApplication(req,res);
+router.post('/new', upload.array('files', 10), (req,res) => {
+    applicationsController.createApplication(req,res);
 });
 router.post('/delete', (req,res) => {
     applicationsController.deleteApplication(req,res);

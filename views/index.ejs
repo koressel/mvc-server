@@ -58,8 +58,9 @@
             <div class="notes-container"></div>
             <div class="files-container">
               <h3>Files</h3>
-              <a href="#">resume_techLead_Amazon.pdf</a>
-              <a href="#">cv_techLead_Amazon.pdf</a>
+              <% app.filenames.forEach(name => { %>
+                <a href="/files/<%= name %>"><%= name %></a>
+              <%})%>
             </div>
             <div class="links-container">
               <h3>Links</h3>

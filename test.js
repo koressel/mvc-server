@@ -20,21 +20,6 @@ testData.forEach(app => {
 });
 
 function stringToArray(str) {
-    let array = [];
-    let parsed = false;
-
-    while(!parsed) {
-        let nextStopChar = str.indexOf(',');
-
-        if (nextStopChar !== -1) {
-            console.log(str.substr(0, nextStopChar))
-            array.push(str.substr(0, nextStopChar));
-            str = str.substr(nextStopChar + 1);
-        }
-        else {
-            array.push(str);
-            parsed = true;
-        }
-    }
+    let array = str.split(',');
     return array;
 }
